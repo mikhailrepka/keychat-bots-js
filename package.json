@@ -1,0 +1,19 @@
+{
+  "name": "@keychat/bots",
+  "version": "0.1.0",
+  "description": "Official JavaScript/TypeScript SDK for Key Chat bots",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "files": ["dist", "examples", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "docs": "typedoc src/index.ts",
+    "docs:serve": "npx serve docs"
+  },
+  "engines": { "node": ">=18" },
+  "devDependencies": { "@types/node": "^22.0.0", "serve": "^14.2.4", "typedoc": "^0.28.0", "typescript": "^5.7.0" },
+  "license": "MIT"
+}
