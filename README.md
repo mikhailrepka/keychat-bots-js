@@ -89,4 +89,4 @@ npm run docs
 npm run docs:serve
 ```
 
-Platform documentation: <https://chat.wokey.pro/docs/bots/>. Runtime endpoint: `https://api-chat.wokey.pro` (override with `new KeyChatBot(token, { baseUrl })` for tests).
+Platform documentation: <https://chat.wokey.pro/docs/bots/>. Runtime endpoint: `https://chat.wokey.pro/_keychat` (override with `new KeyChatBot(token, { baseUrl })` for tests).

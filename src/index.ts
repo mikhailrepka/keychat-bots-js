@@ -1,6 +1,6 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 
-export const DEFAULT_BASE_URL = "https://api-chat.wokey.pro";
+export const DEFAULT_BASE_URL = "https://chat.wokey.pro/_keychat";
 
 export type Action =
   | { type?: "send_command"; command: string }

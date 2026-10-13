@@ -9,6 +9,7 @@
   "files": ["dist", "examples", "README.md"],
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "prepare": "npm run build",
     "test": "npm run build && node --test test/*.test.mjs",
     "docs": "typedoc src/index.ts",
     "docs:serve": "npx serve docs"
