@@ -24,7 +24,7 @@ Use a local checkout from another project with `npm install ../keychat-bots-js`.
 
 ## Connect
 
-Create a bot in Key Chat, issue a token, and keep both the runtime token and webhook signing secret in environment variables.
+Create a bot in Key Chat and issue its runtime token. In the existing bot's editor, enter a public HTTPS webhook URL and save it; Key Chat reveals the signing secret once. Store the values on your server as `KEYCHAT_BOT_TOKEN` and `KEYCHAT_WEBHOOK_SECRET`. Rotating the webhook secret invalidates the previous value immediately.
 
 ```ts
 import { KeyChatBot, callbackButton, commandButton } from "@keychat/bots";
