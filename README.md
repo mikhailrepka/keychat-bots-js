@@ -27,7 +27,7 @@ Use a local checkout from another project with `npm install ../keychat-bots-js`.
 Create a bot in Key Chat and issue its runtime token. In the existing bot's editor, enter a public HTTPS webhook URL and save it; Key Chat reveals the signing secret once. Store the values on your server as `KEYCHAT_BOT_TOKEN` and `KEYCHAT_WEBHOOK_SECRET`. Rotating the webhook secret invalidates the previous value immediately.
 
 ```ts
-import { KeyChatBot, callbackButton, commandButton } from "@keychat/bots";
+import { KeyChatBot, botCommand, callbackButton, commandButton } from "@keychat/bots";
 
 const bot = new KeyChatBot(process.env.KEYCHAT_BOT_TOKEN!);
 
@@ -37,13 +37,19 @@ await bot.sendMessage({
     text: "**Choose an action**",
     format: "markdown",
     keyboard: { rows: [[commandButton("/help")], [callbackButton("details", "Details", "job-42")]] },
-    menu: { rows: [[commandButton("/start"), commandButton("/settings")]] }
+    menu: { rows: [[commandButton("/start"), commandButton("/settings")]] },
+    commands: [
+      botCommand("/start", { description: "Start again", icon: "▶️" }),
+      botCommand("/invite", { arguments: "<email>", description: "Invite a user" })
+    ]
   },
   idempotency_key: crypto.randomUUID()
 });
 ```
 
 `menu` replaces the current bot menu. Omit it to keep the menu, send `menu: null` to hide it. `keyboard` contains buttons attached to a message. A callback button does not post a visible user message.
+
+`commands` updates slash-command autocomplete in direct bot chats. Omit it to keep the current list; send `commands: null` or `commands: []` to clear it. `arguments` is shown as a hint but is not inserted into the composer.
 
 Edit a message without changing its event reference:
 

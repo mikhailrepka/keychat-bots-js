@@ -13,6 +13,7 @@ export interface Button {
   single_use?: boolean; expires_at?: string;
 }
 export interface ButtonGrid { rows: Button[][] }
+export interface BotCommand { command: string; arguments?: string; description?: string; icon?: string }
 export interface Media {
   type: "image" | "video" | "file"; url: string; name?: string; mime_type?: string;
   size?: number; width?: number; height?: number; duration_ms?: number;
@@ -23,6 +24,8 @@ export interface MessageContent {
   menu?: ButtonGrid | null;
   /** Buttons attached below this message; null removes them on edit. */
   keyboard?: ButtonGrid | null;
+  /** Omit to keep current autocomplete commands; null or [] clears them. */
+  commands?: BotCommand[] | null;
 }
 export interface SendMessageInput {
   chat_id: string; content: MessageContent; idempotency_key?: string;
@@ -103,6 +106,7 @@ export async function dispatchWebhook(
 }
 
 export const commandButton = (command: string, options: Omit<Button, "command" | "action"> = {}): Button => ({ ...options, command });
+export const botCommand = (command: string, options: Omit<BotCommand, "command"> = {}): BotCommand => ({ ...options, command });
 export const callbackButton = (id: string, text: string, data?: string, options: Omit<Button, "id" | "text" | "action"> = {}): Button => ({ ...options, id, text, action: { type: "callback", data } });
 export const messageButton = (text: string, message: string, options: Omit<Button, "text" | "action"> = {}): Button => ({ ...options, text, action: { type: "send_message", text: message } });
 export const urlButton = (text: string, url: string, options: Omit<Button, "text" | "action"> = {}): Button => ({ ...options, text, action: { type: "open_url", url } });
